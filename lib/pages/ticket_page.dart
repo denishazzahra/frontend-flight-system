@@ -30,7 +30,6 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
     super.initState();
     _loadToken();
     _tabController = TabController(length: 2, vsync: this);
-    today = DateTime(today.year, today.month, today.day);
   }
 
   @override
@@ -219,11 +218,15 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
       setState(() {
         activeTickets = loadedTickets
             .where((ticket) =>
-                parseDate(ticket.date!).isAtSameMomentAs(today) ||
-                parseDate(ticket.date!).isAfter(today))
+                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
+                    .isAtSameMomentAs(today) ||
+                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
+                    .isAfter(today))
             .toList();
         expiredTickets = loadedTickets
-            .where((ticket) => parseDate(ticket.date!).isBefore(today))
+            .where((ticket) =>
+                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
+                    .isBefore(today))
             .toList()
             .reversed
             .toList();
