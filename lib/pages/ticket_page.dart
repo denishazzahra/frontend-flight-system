@@ -224,6 +224,8 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
             .toList();
         expiredTickets = loadedTickets
             .where((ticket) => parseDate(ticket.date!).isBefore(today))
+            .toList()
+            .reversed
             .toList();
       });
     }).catchError((error) {
