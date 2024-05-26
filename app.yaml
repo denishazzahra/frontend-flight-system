@@ -1,4 +1,5 @@
 runtime: python27
+service: frontend-flight-system
 api_version: 1
 threadsafe: true
 
