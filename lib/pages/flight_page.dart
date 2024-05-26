@@ -316,9 +316,10 @@ class _FlightPageState extends State<FlightPage> {
         stateIndex = List.filled(flightList.length, false);
       });
     }).catchError((error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $error')),
-      );
+      setState(() {
+        flightList = [];
+        stateIndex = [];
+      });
     }).whenComplete(() {
       setState(() {
         _isLoading = false;

@@ -232,9 +232,10 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
             .toList();
       });
     }).catchError((error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $error')),
-      );
+      setState(() {
+        activeTickets = [];
+        expiredTickets = [];
+      });
     }).whenComplete(() {
       setState(() {
         _isLoading = false;

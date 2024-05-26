@@ -143,8 +143,8 @@ class _HomePageState extends State<HomePage> {
       onDestinationSelected: (int index) {
         setState(() {
           currentPageIndex = index;
-          dAirportCode = null;
-          dAirportName = null;
+          dAirportCode = '';
+          dAirportName = '';
         });
       },
       indicatorColor: blackColor,

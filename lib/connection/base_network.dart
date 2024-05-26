@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class BaseNetwork {
-  static String baseUrl = dotenv.env['API_BASE']!;
+  static String baseUrl =
+      'https://backend-flight-system-dot-h-02-415813.uc.r.appspot.com';
 
   static Future<Map<String, dynamic>> get(String partUrl) async {
     final String fullUrl = "$baseUrl/$partUrl";

@@ -37,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       _dateController.text = formattedFlightDate(today);
       selectedDate = formattedSearchDate(today);
-      if (widget.dAirportCode != null) {
+      if (widget.dAirportCode != '') {
         _destinationController.text =
             '${widget.dAirportName!} (${widget.dAirportCode})';
         selectedDestination = widget.dAirportCode!;
