@@ -2,7 +2,7 @@ runtime: python39
 service: frontend-flight-system
 
 handlers:
-- url: /.*
+- url: /
   static_files: web/index.html
   upload: web/index.html
 - url: /(.*)
