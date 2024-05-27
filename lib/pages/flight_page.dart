@@ -51,6 +51,7 @@ class _FlightPageState extends State<FlightPage> {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
+          backgroundColor: whiteColor,
           centerTitle: true,
           title: Column(
             children: [

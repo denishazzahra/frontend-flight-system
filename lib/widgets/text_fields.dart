@@ -25,8 +25,6 @@ TextFormField textField({
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       hintText: placeholder,
-      filled: true,
-      fillColor: whiteColor,
       contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(5)),

@@ -140,6 +140,7 @@ class _HomePageState extends State<HomePage> {
   Widget _bottomNavbar() {
     return NavigationBar(
       elevation: 0,
+      backgroundColor: whiteColor,
       onDestinationSelected: (int index) {
         setState(() {
           currentPageIndex = index;

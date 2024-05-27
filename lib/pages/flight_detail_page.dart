@@ -84,6 +84,7 @@ class _FlightBookingPageState extends State<FlightBookingPage> {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
+          backgroundColor: whiteColor,
           centerTitle: true,
           title: boldDefaultText('Ticket Booking', TextAlign.center),
         ),

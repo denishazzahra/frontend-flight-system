@@ -44,6 +44,7 @@ class _TicketDetailPageState extends State<TicketDetailPage> {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
+          backgroundColor: whiteColor,
           centerTitle: true,
           title: boldDefaultText('Ticket Details', TextAlign.center),
         ),

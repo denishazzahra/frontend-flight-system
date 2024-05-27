@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugas5_tpm/utils/colors.dart';
 import 'package:tugas5_tpm/widgets/testimonial_dropdown.dart';
 import 'package:tugas5_tpm/widgets/texts.dart';
 
@@ -12,6 +13,7 @@ class TestimonialPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
+          backgroundColor: whiteColor,
           centerTitle: true,
           title: boldDefaultText('Testimonial', TextAlign.center),
         ),

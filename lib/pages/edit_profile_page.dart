@@ -50,6 +50,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         appBar: AppBar(
           elevation: 0,
           scrolledUnderElevation: 0,
+          backgroundColor: whiteColor,
           centerTitle: true,
           title: boldDefaultText('Edit Profile', TextAlign.center),
         ),
