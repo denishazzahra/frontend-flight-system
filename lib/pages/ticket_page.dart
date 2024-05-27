@@ -215,19 +215,20 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
   void _loadTicket() {
     ApiDataSource.getTickets(token).then((data) {
       final loadedTickets = LoadTicketModel.fromJson(data).tickets!;
-      print(today.toIso8601String());
       setState(() {
         activeTickets = loadedTickets
             .where((ticket) =>
-                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
+                parseArrivalTime(ticket.date!, ticket.flight!.departureTime!,
+                        ticket.flight!.arrivalTime!)
                     .isAtSameMomentAs(today) ||
-                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
+                parseArrivalTime(ticket.date!, ticket.flight!.departureTime!,
+                        ticket.flight!.arrivalTime!)
                     .isAfter(today))
             .toList();
         expiredTickets = loadedTickets
-            .where((ticket) =>
-                parseDate('${ticket.date!} ${ticket.flight!.arrivalTime!}')
-                    .isBefore(today))
+            .where((ticket) => parseArrivalTime(ticket.date!,
+                    ticket.flight!.departureTime!, ticket.flight!.arrivalTime!)
+                .isBefore(today))
             .toList()
             .reversed
             .toList();

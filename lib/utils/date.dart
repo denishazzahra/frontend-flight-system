@@ -78,5 +78,19 @@ String formatDuration(Duration duration) {
 }
 
 DateTime parseDate(String date) {
-  return DateFormat('yyyy-MM-dd HH:mm:ss').parse(date);
+  return DateFormat('yyyy-MM-dd').parse(date);
+}
+
+DateTime parseArrivalTime(String date, String time1, String time2) {
+  DateTime parsedDate = DateFormat('yyyy-MM-dd').parse(date);
+  DateTime parsedTime1 = DateFormat('HH:mm:ss').parse(time1);
+  DateTime parsedTime2 = DateFormat('HH:mm:ss').parse(time2);
+  if (parsedTime2.isBefore(parsedTime1)) {
+    String temp = DateFormat('yyyy-MM-dd')
+        .format(parsedDate.add(const Duration(days: 1)));
+    parsedTime2 = DateFormat('yyyy-MM-dd HH:mm:ss').parse('$temp $time2');
+  } else {
+    parsedTime2 = DateFormat('yyyy-MM-dd HH:mm:ss').parse('$date $time2');
+  }
+  return parsedTime2.toUtc().add(const Duration(hours: 7));
 }
