@@ -55,7 +55,7 @@ Text disableSubText(String text, TextAlign alignment) {
     text,
     textAlign: alignment,
     style: TextStyle(
-      fontSize: defaultSize,
+      fontSize: smallSize,
       fontWeight: FontWeight.w400,
       color: lightGreyColor,
     ),
