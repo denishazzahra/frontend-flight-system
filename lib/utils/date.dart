@@ -78,5 +78,5 @@ String formatDuration(Duration duration) {
 }
 
 DateTime parseDate(String date) {
-  return DateFormat('yyyy-MM-dd').parse(date);
+  return DateFormat('yyyy-MM-dd HH:mm:ss').parse(date);
 }

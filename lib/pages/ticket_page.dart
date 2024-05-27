@@ -23,7 +23,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
   late String token;
   late TabController _tabController;
   bool _isLoading = true;
-  DateTime today = DateTime.now();
+  DateTime today = DateTime.now().toUtc().add(const Duration(hours: 7));
 
   @override
   void initState() {
@@ -215,6 +215,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
   void _loadTicket() {
     ApiDataSource.getTickets(token).then((data) {
       final loadedTickets = LoadTicketModel.fromJson(data).tickets!;
+      print(today.toIso8601String());
       setState(() {
         activeTickets = loadedTickets
             .where((ticket) =>
