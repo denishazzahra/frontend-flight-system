@@ -77,15 +77,18 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
       );
     } else {
       return Container(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView.separated(
           itemBuilder: (context, index) {
+            if (index == 0 || index == tickets.length + 1) {
+              return const SizedBox(height: 15);
+            }
             return InkWell(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return TicketDetailPage(ticket: tickets[index]);
+                    return TicketDetailPage(ticket: tickets[index - 1]);
                   }),
                 );
               },
@@ -105,7 +108,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                           child: smallerText(
                               formattedFlightDate(
                                 DateFormat('yyyy-MM-dd')
-                                    .parse(tickets[index].date!),
+                                    .parse(tickets[index - 1].date!),
                               ),
                               TextAlign.left),
                         ),
@@ -117,7 +120,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                           color: greyTextColor,
                         ),
                         const SizedBox(width: 10),
-                        smallerSubText(tickets[index].id!, TextAlign.right),
+                        smallerSubText(tickets[index - 1].id!, TextAlign.right),
                       ],
                     ),
                     const SizedBox(height: 5),
@@ -131,7 +134,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                         const SizedBox(width: 10),
                         Expanded(
                           child: boldDefaultText(
-                            '${tickets[index].flight!.airline} (${tickets[index].flight!.flightNumber})',
+                            '${tickets[index - 1].flight!.airline} (${tickets[index - 1].flight!.flightNumber})',
                             TextAlign.left,
                           ),
                         ),
@@ -147,13 +150,13 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                                 child: Column(
                                   children: [
                                     boldDefaultText(
-                                        tickets[index]
+                                        tickets[index - 1]
                                             .flight!
                                             .originAirport!
                                             .name!,
                                         TextAlign.center),
                                     smallerSubText(
-                                        tickets[index]
+                                        tickets[index - 1]
                                             .flight!
                                             .originAirport!
                                             .city!,
@@ -167,13 +170,13 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                                 child: Column(
                                   children: [
                                     boldDefaultText(
-                                        tickets[index]
+                                        tickets[index - 1]
                                             .flight!
                                             .destinationAirport!
                                             .name!,
                                         TextAlign.center),
                                     smallerSubText(
-                                        tickets[index]
+                                        tickets[index - 1]
                                             .flight!
                                             .destinationAirport!
                                             .city!,
@@ -190,8 +193,10 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
                           children: [
                             smallerSubText('Total', TextAlign.right),
                             boldSmallText(
-                              formatNumberDecimal(tickets[index].soldAtPrice!,
-                                  tickets[index].currency!, true),
+                              formatNumberDecimal(
+                                  tickets[index - 1].soldAtPrice!,
+                                  tickets[index - 1].currency!,
+                                  true),
                               TextAlign.right,
                             )
                           ],
@@ -206,7 +211,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
           separatorBuilder: ((context, index) {
             return const SizedBox(height: 15);
           }),
-          itemCount: tickets.length,
+          itemCount: tickets.length + 2,
         ),
       );
     }
