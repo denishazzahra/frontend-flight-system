@@ -81,7 +81,7 @@ class _TicketPageState extends State<TicketPage> with TickerProviderStateMixin {
         child: ListView.separated(
           itemBuilder: (context, index) {
             if (index == 0 || index == tickets.length + 1) {
-              return const SizedBox(height: 15);
+              return const SizedBox();
             }
             return InkWell(
               onTap: () {
