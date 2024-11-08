@@ -103,272 +103,278 @@ class _FlightBookingPageState extends State<FlightBookingPage> {
       destinationTimezone,
       false,
     );
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            listTitleText('Flight Information'),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(1, 3),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            boldDefaultText(widget.flight.originAirport!.name!,
-                                TextAlign.center),
-                            smallerSubText(widget.flight.originAirport!.city!,
-                                TextAlign.center),
-                          ],
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(15),
+          constraints: const BoxConstraints(
+            maxWidth: 600,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              listTitleText('Flight Information'),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(1, 3),
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              boldDefaultText(
+                                  widget.flight.originAirport!.name!,
+                                  TextAlign.center),
+                              smallerSubText(widget.flight.originAirport!.city!,
+                                  TextAlign.center),
+                            ],
+                          ),
                         ),
-                      ),
-                      const Icon(Symbols.arrow_forward, fill: 0, size: 28),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            boldDefaultText(
-                                widget.flight.destinationAirport!.name!,
-                                TextAlign.center),
-                            smallerSubText(
-                                widget.flight.destinationAirport!.city!,
-                                TextAlign.center),
-                          ],
+                        const Icon(Symbols.arrow_forward, fill: 0, size: 28),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              boldDefaultText(
+                                  widget.flight.destinationAirport!.name!,
+                                  TextAlign.center),
+                              smallerSubText(
+                                  widget.flight.destinationAirport!.city!,
+                                  TextAlign.center),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Airline', TextAlign.left),
-                      boldDefaultText(
-                        widget.flight.airline!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Flight Number', TextAlign.left),
-                      boldDefaultText(
-                        widget.flight.flightNumber!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Departure Time', TextAlign.left),
-                            boldDefaultText(
-                              '${duration['departure_date']!}, ${duration['departure_time']!}',
-                              TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      _timezoneDropdown(
-                          'Origin', originTimezone, _originTimezoneController)
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Arrival Time', TextAlign.left),
-                            boldDefaultText(
-                              '${duration['arrival_date']!}, ${duration['arrival_time']!}',
-                              TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      _timezoneDropdown('Destination', destinationTimezone,
-                          _destinationTimezoneController)
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            listTitleText('Passenger Information'),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(1, 3),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                children: [
-                  textFieldWithLabel(
-                    controller: _fullNameController,
-                    placeholder: 'Full Name',
-                    prefixIcon: const Icon(Icons.person_outline_rounded),
-                  ),
-                  const SizedBox(height: 15),
-                  textFieldWithLabel(
-                    controller: _emailController,
-                    placeholder: 'Email Address',
-                    prefixIcon: const Icon(Icons.alternate_email_rounded),
-                  ),
-                  const SizedBox(height: 15),
-                  textFieldWithLabel(
-                    controller: _phoneController,
-                    placeholder: 'Phone Number',
-                    prefixIcon: const Icon(Icons.numbers_rounded),
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Switch(
-                        value: addData,
-                        activeColor: blackColor,
-                        onChanged: (bool value) {
-                          setState(() {
-                            addData = value;
-                          });
-                          fillForm();
-                        },
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: subText(
-                          'Add your data to the form',
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Airline', TextAlign.left),
+                        boldDefaultText(
+                          widget.flight.airline!,
                           TextAlign.left,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Flight Number', TextAlign.left),
+                        boldDefaultText(
+                          widget.flight.flightNumber!,
+                          TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Departure Time', TextAlign.left),
+                              boldDefaultText(
+                                '${duration['departure_date']!}, ${duration['departure_time']!}',
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        _timezoneDropdown(
+                            'Origin', originTimezone, _originTimezoneController)
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Arrival Time', TextAlign.left),
+                              boldDefaultText(
+                                '${duration['arrival_date']!}, ${duration['arrival_time']!}',
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        _timezoneDropdown('Destination', destinationTimezone,
+                            _destinationTimezoneController)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              listTitleText('Passenger Information'),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(1, 3),
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  children: [
+                    textFieldWithLabel(
+                      controller: _fullNameController,
+                      placeholder: 'Full Name',
+                      prefixIcon: const Icon(Icons.person_outline_rounded),
+                    ),
+                    const SizedBox(height: 15),
+                    textFieldWithLabel(
+                      controller: _emailController,
+                      placeholder: 'Email Address',
+                      prefixIcon: const Icon(Icons.alternate_email_rounded),
+                    ),
+                    const SizedBox(height: 15),
+                    textFieldWithLabel(
+                      controller: _phoneController,
+                      placeholder: 'Phone Number',
+                      prefixIcon: const Icon(Icons.numbers_rounded),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Switch(
+                          value: addData,
+                          activeColor: blackColor,
+                          onChanged: (bool value) {
+                            setState(() {
+                              addData = value;
+                            });
+                            fillForm();
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: subText(
+                            'Add your data to the form',
+                            TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              listTitleText('Seat Information'),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(1, 3),
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Class', TextAlign.left),
+                        boldDefaultText(
+                          seat.type!,
+                          TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Price', TextAlign.left),
+                              boldDefaultText(
+                                formatNumberDecimal(price, currency, false),
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        _currencyDropdown(currency, _currencyController)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  Checkbox(
+                    checkColor: whiteColor,
+                    activeColor: blackColor,
+                    value: agreeState,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        agreeState = value!;
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      'I agree to the Terms & Condition and Privacy Policy.',
+                      softWrap: true,
+                    ),
                   )
                 ],
               ),
-            ),
-            const SizedBox(height: 15),
-            listTitleText('Seat Information'),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(1, 3),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Class', TextAlign.left),
-                      boldDefaultText(
-                        seat.type!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Price', TextAlign.left),
-                            boldDefaultText(
-                              formatNumberDecimal(price, currency, false),
-                              TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      _currencyDropdown(currency, _currencyController)
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: whiteColor,
-                  activeColor: blackColor,
-                  value: agreeState,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      agreeState = value!;
-                    });
-                  },
-                ),
-                const SizedBox(width: 10),
-                const Expanded(
-                  child: Text(
-                    'I agree to the Terms & Condition and Privacy Policy.',
-                    softWrap: true,
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 15),
-            blackButton(context, 'Purchase Ticket', () {
-              _sendRequest();
-            }),
-          ],
+              const SizedBox(height: 15),
+              blackButton(context, 'Purchase Ticket', () {
+                _confirmPayment();
+              }),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _sendRequest() {
+  void _confirmPayment() {
     if (!agreeState) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -385,40 +391,102 @@ class _FlightBookingPageState extends State<FlightBookingPage> {
         ),
       );
     } else {
-      Map<String, dynamic> body = {
-        'flightId': widget.flightId,
-        'seatId': seat.id!,
-        'fullName': _fullNameController.text,
-        'email': _emailController.text,
-        'phone': _phoneController.text,
-        'date': widget.date,
-        'soldAtPrice': price,
-        'currency': currency
-      };
-      ApiDataSource.bookTicket(token, body).then((data) {
-        BookTicketModel ticketModel = BookTicketModel.fromJson(data);
-        String text = '';
-        if (ticketModel.status == 'Success') {
-          text = 'Ticket booked successfully.';
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return const HomePage(index: 2);
-            }),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              constraints: const BoxConstraints(
+                maxWidth: 600,
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Payment Confirmation',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                      'Are you sure you want to purchase this ticket? This action can not be undone.'),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                        },
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(color: greyTextColor),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                          _sendRequest();
+                        },
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(color: safeColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           );
-        } else {
-          text = 'Failed to book ticket!';
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(text)),
-        );
-      }).catchError((error) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('An error occurred: $error')));
-      });
+        },
+      );
     }
+  }
+
+  void _sendRequest() {
+    // Proceed with the delete request
+    Map<String, dynamic> body = {
+      'flightId': widget.flightId,
+      'seatId': seat.id!,
+      'fullName': _fullNameController.text,
+      'email': _emailController.text,
+      'phone': _phoneController.text,
+      'date': widget.date,
+      'soldAtPrice': price,
+      'currency': currency
+    };
+    ApiDataSource.bookTicket(token, body).then((data) {
+      BookTicketModel ticketModel = BookTicketModel.fromJson(data);
+      String text = '';
+      if (ticketModel.status == 'Success') {
+        text = 'Ticket booked successfully.';
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return const HomePage(index: 2);
+          }),
+        );
+      } else {
+        text = 'Failed to book ticket!';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(text)),
+      );
+    }).catchError((error) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('An error occurred: $error')));
+    });
   }
 
   void fillForm() {

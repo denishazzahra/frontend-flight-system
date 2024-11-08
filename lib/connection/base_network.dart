@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class BaseNetwork {
-  static String baseUrl =
-      'https://backend-flight-system-dot-h-02-415813.uc.r.appspot.com';
+  static String baseUrl = 'http://localhost:8080';
 
   static Future<Map<String, dynamic>> get(String partUrl) async {
     final String fullUrl = "$baseUrl/$partUrl";

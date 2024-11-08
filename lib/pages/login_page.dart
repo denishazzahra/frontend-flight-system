@@ -29,9 +29,12 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: SingleChildScrollView(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              constraints: const BoxConstraints(
+                maxWidth: 600,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

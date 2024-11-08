@@ -63,228 +63,235 @@ class _TicketDetailPageState extends State<TicketDetailPage> {
       destinationTimezone,
       false,
     );
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            listTitleText('Flight Information'),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(1, 3),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(15),
+          constraints: const BoxConstraints(
+            maxWidth: 600,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              listTitleText('Flight Information'),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(1, 3),
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Symbols.confirmation_number,
+                          fill: 0,
+                          size: 20,
+                          color: greyTextColor,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                            child: subText(widget.ticket.id!, TextAlign.left))
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              boldDefaultText(
+                                  widget.ticket.flight!.originAirport!.name!,
+                                  TextAlign.center),
+                              smallerSubText(
+                                  widget.ticket.flight!.originAirport!.city!,
+                                  TextAlign.center),
+                            ],
+                          ),
+                        ),
+                        const Icon(Symbols.arrow_forward, fill: 0, size: 28),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              boldDefaultText(
+                                  widget
+                                      .ticket.flight!.destinationAirport!.name!,
+                                  TextAlign.center),
+                              smallerSubText(
+                                  widget
+                                      .ticket.flight!.destinationAirport!.city!,
+                                  TextAlign.center),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Airline', TextAlign.left),
+                        boldDefaultText(
+                          widget.ticket.flight!.airline!,
+                          TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Flight Number', TextAlign.left),
+                        boldDefaultText(
+                          widget.ticket.flight!.flightNumber!,
+                          TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Seat Class', TextAlign.left),
+                              boldDefaultText(
+                                widget.ticket.seat!.type!,
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              smallerSubText('Total Price', TextAlign.right),
+                              boldDefaultText(
+                                formatNumberDecimal(widget.ticket.soldAtPrice!,
+                                    widget.ticket.currency!, true),
+                                TextAlign.right,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Departure Time', TextAlign.left),
+                              boldDefaultText(
+                                '${duration['departure_date']!}, ${duration['departure_time']!}',
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        _timezoneDropdown(
+                            'Origin', originTimezone, _originTimezoneController)
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              smallerSubText('Arrival Time', TextAlign.left),
+                              boldDefaultText(
+                                '${duration['arrival_date']!}, ${duration['arrival_time']!}',
+                                TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        _timezoneDropdown('Destination', destinationTimezone,
+                            _destinationTimezoneController)
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Symbols.confirmation_number,
-                        fill: 0,
-                        size: 20,
-                        color: greyTextColor,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                          child: subText(widget.ticket.id!, TextAlign.left))
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            boldDefaultText(
-                                widget.ticket.flight!.originAirport!.name!,
-                                TextAlign.center),
-                            smallerSubText(
-                                widget.ticket.flight!.originAirport!.city!,
-                                TextAlign.center),
-                          ],
+              const SizedBox(height: 15),
+              listTitleText('Passenger Information'),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(15),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(1, 3),
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Full Name', TextAlign.left),
+                        boldDefaultText(
+                          widget.ticket.fullName!,
+                          TextAlign.left,
                         ),
-                      ),
-                      const Icon(Symbols.arrow_forward, fill: 0, size: 28),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            boldDefaultText(
-                                widget.ticket.flight!.destinationAirport!.name!,
-                                TextAlign.center),
-                            smallerSubText(
-                                widget.ticket.flight!.destinationAirport!.city!,
-                                TextAlign.center),
-                          ],
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Email', TextAlign.left),
+                        boldDefaultText(
+                          widget.ticket.email!,
+                          TextAlign.left,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Airline', TextAlign.left),
-                      boldDefaultText(
-                        widget.ticket.flight!.airline!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Flight Number', TextAlign.left),
-                      boldDefaultText(
-                        widget.ticket.flight!.flightNumber!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Seat Class', TextAlign.left),
-                            boldDefaultText(
-                              widget.ticket.seat!.type!,
-                              TextAlign.left,
-                            ),
-                          ],
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        smallerSubText('Phone', TextAlign.left),
+                        boldDefaultText(
+                          widget.ticket.phone!,
+                          TextAlign.left,
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            smallerSubText('Total Price', TextAlign.right),
-                            boldDefaultText(
-                              formatNumberDecimal(widget.ticket.soldAtPrice!,
-                                  widget.ticket.currency!, true),
-                              TextAlign.right,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Departure Time', TextAlign.left),
-                            boldDefaultText(
-                              '${duration['departure_date']!}, ${duration['departure_time']!}',
-                              TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      _timezoneDropdown(
-                          'Origin', originTimezone, _originTimezoneController)
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            smallerSubText('Arrival Time', TextAlign.left),
-                            boldDefaultText(
-                              '${duration['arrival_date']!}, ${duration['arrival_time']!}',
-                              TextAlign.left,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      _timezoneDropdown('Destination', destinationTimezone,
-                          _destinationTimezoneController)
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            listTitleText('Passenger Information'),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(1, 3),
-                  ),
-                ],
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Full Name', TextAlign.left),
-                      boldDefaultText(
-                        widget.ticket.fullName!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Email', TextAlign.left),
-                      boldDefaultText(
-                        widget.ticket.email!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      smallerSubText('Phone', TextAlign.left),
-                      boldDefaultText(
-                        widget.ticket.phone!,
-                        TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

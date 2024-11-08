@@ -42,14 +42,18 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(15),
+            constraints: const BoxConstraints(
+              maxWidth: 600,
+            ),
             child: Column(
               children: [
                 const SizedBox(height: 30),
                 CircleAvatar(
                   radius: 50,
-                  child: user.profilePicture != null
-                      ? Image.network(user.profilePicture!)
-                      : Image.asset('assets/images/default_pic.png'),
+                  backgroundImage: user.profilePicture != null
+                      ? NetworkImage(user.profilePicture!)
+                      : const AssetImage('assets/images/default_pic.png')
+                          as ImageProvider,
                 ),
                 const SizedBox(height: 30),
                 Row(

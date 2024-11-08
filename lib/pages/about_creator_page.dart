@@ -17,37 +17,42 @@ class AboutCreatorPage extends StatelessWidget {
           centerTitle: true,
           title: boldDefaultText('About Creator', TextAlign.center),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(15),
+        body: Center(
+          child: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(15),
-              height: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: lightGreyColor),
+              constraints: const BoxConstraints(
+                maxWidth: 600,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/images/kucing_teriak.jpeg'),
-                    radius: 50,
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Denisha Kyla Azzahra',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                height: 400,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: lightGreyColor),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/kucing_teriak.jpeg'),
+                      radius: 50,
                     ),
-                  ),
-                  const Text('123210130'),
-                  const SizedBox(height: 5),
-                  _githubButton(context, 'denishazzahra'),
-                ],
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Denisha Kyla Azzahra',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const Text('123210130'),
+                    const SizedBox(height: 5),
+                    _githubButton(context, 'denishazzahra'),
+                  ],
+                ),
               ),
             ),
           ),
@@ -59,7 +64,7 @@ class AboutCreatorPage extends StatelessWidget {
   Widget _githubButton(BuildContext context, String username) {
     Uri url = Uri.parse('https://github.com/$username');
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: ElevatedButton(

@@ -58,6 +58,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
           child: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(15),
+              constraints: const BoxConstraints(
+                maxWidth: 600,
+              ),
               child: Column(
                 children: [
                   Stack(

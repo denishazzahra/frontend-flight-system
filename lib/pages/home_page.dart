@@ -24,9 +24,11 @@ class _HomePageState extends State<HomePage> {
   late String token = '';
   late int currentPageIndex = widget.index;
   String? dAirportName, dAirportCode;
+  late double width = 0;
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         appBar: appBar(context),
@@ -63,13 +65,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _recommendationDisplay() {
     final items = recommendationList.asMap().values.toList();
-    return Column(
-      children: items.map((item) {
-        int index = items.indexOf(item);
-        bool isLastItem = index == items.length - 1;
-        return Column(
-          children: [
-            InkWell(
+    return Wrap(
+        spacing: 15,
+        runSpacing: 15,
+        children: items.map((item) {
+          return SizedBox(
+            width: width < 600 ? width - 30 : (width - 45) / 2,
+            child: InkWell(
               onTap: () {
                 setState(() {
                   dAirportName = item.name;
@@ -130,11 +132,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            if (!isLastItem) const SizedBox(height: 15),
-          ],
-        );
-      }).toList(),
-    );
+          );
+        }).toList());
   }
 
   Widget _bottomNavbar() {

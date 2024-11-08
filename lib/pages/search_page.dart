@@ -62,6 +62,9 @@ class _SearchPageState extends State<SearchPage> {
       child: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(15),
+          constraints: const BoxConstraints(
+            maxWidth: 600,
+          ),
           width: double.infinity,
           child: Column(
             children: [
